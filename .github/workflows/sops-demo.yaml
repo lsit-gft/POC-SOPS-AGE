@@ -1,0 +1,35 @@
+name: Encrypt application.properties.yaml
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  encrypt-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install SOPS
+        run: |
+          curl -L https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux -o /usr/local/bin/sops
+          chmod +x /usr/local/bin/sops
+
+      - name: Encrypt application.properties.yaml
+        run: |
+          sops --encrypt \
+               --age ${{ secrets.Public_key }} \
+               application-local.yaml > application-local.yaml.enc
+      - name: Move encrypted file to repository
+        run: |
+          mv application-local.yaml.enc $GITHUB_WORKSPACE/application-local.yaml.enc
+       
+      - name: Commit encrypted file
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add application-local.yaml.enc
+          git commit -m "Encrypt application.properties.yaml"
+          git push

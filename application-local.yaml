@@ -1,0 +1,115 @@
+server:
+  port: 80
+
+toggens:
+  marketplace: 
+    address: "0x26c51c1c840ed18bb94f13f92c36702440d5af25"
+    collections:
+      link: https://nftmarketplace.togg.cloud/
+      sellerFeeBasisPoints: 1000
+  treasury: 
+    wallet: "0x5879b600931b23e933c6853e683cd4202b721515"
+    account: "61662dc0-d341-4d9c-9628-12ca873991ba"
+  ipfs:
+    url: https://ipfs.infura.io:5001/api/v0
+    authentication: MkY0UWxlS3RjNGF1dEN6R0cydkMxR3BPdVVsOjBhOWY3NTU5ZjVlYWZiOTExYWRjMGM5ZjQ1MTdhYjJm
+  feign:
+    toggen:
+      url: http://toggens-avalanche-svc:80/api/metaco
+    share:
+      permissions:
+        url: http://toggens-avalanche-svc:80/api/sharepermissions
+    togg:
+      car:
+        nft:
+          url: http://toggens-avalanche-svc:80/api/toggen/carid
+      nft:
+        url: http://toggens-avalanche-svc:80/api/metaco/nft
+        collections:
+          url: http://toggens-avalanche-svc:80/
+      poap:
+        url: http://toggens-avalanche-svc:80/api/poap
+      admin:
+        url: http://toggens-avalanche-svc:80/api/admin
+      harmonize-sync:
+        url: http://toggens-hmz-sync-svc:80
+      notifications:
+        url: https://mobile-api.togg.cloud:7443
+        apiKey: 9Uc01Nql5x36Bt8w
+        
+  housekeeping:
+    airdrops:
+      active: false
+      cron: 0 0 0 * * *
+      days: 365
+  grpc:
+    profile:
+      url: toggid-api-gateway.togg.cloud
+      port: 9443
+      tenant: toggid
+    achivement:
+      url: mobile-api.togg.cloud
+      port: 9445
+      tenant: toggid
+    notifications:
+      url: mobile-api.togg.cloud
+      port: 7443
+  transactions:
+    outside:
+      enabled: true
+
+magnets:
+  collectionAddress: "0xeA2614236694bC47B22C0cfC02a096596Dbc9FB8"
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql-postgresql-ha-pgpool.nft-marketplace-system.svc.cluster.local:5432/toggens_prod
+    username: postgres
+    password: kevAYaSVrD
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://toggid.togg.cloud/auth/realms/toggid/protocol/openid-connect/certs
+  zipkin:
+    base-url: http://10.0.77.170:9411
+  rabbitmq:
+    host: rabitmq-rabbitmq
+    port: 5672
+    username: user
+    password: ITbsBi3OTFbIITOK
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
+
+  activemq:
+    broker-url: tcp://activemq:61616
+    user: admin
+    password: t0Gg.aDm1n.uAt
+
+testing:
+  baseUrl: http://localhost
+
+logging:
+  file:
+    name: /var/log/toggens/operations.log
+
+countly:
+  server-url: https://togg.count.ly
+  app-key: fe21670953888b32e9e84157a1d9ae0585e1ac28
+  target-folder: /tmp
+  
+marketplace:
+  collections:
+    link: http://nft-int.togg.cloud/
+    sellerFeeBasisPoints: 1000
+
+qr:
+  base-url: https://snowtrace.io/tx/
+
+togg-id:
+  endpoint: https://toggid.togg.cloud/auth/realms/toggid/protocol/openid-connect/token
+  client-id: client_toggen_operations
+  client-secret: 0coGRaIQ2lNfE8g1nNbtluwgsUVJMBPX
+  millis-margin: 43200000
