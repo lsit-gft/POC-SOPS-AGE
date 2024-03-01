@@ -17,7 +17,7 @@ jobs:
           curl -L https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux -o /usr/local/bin/sops
           chmod +x /usr/local/bin/sops
 
-      - name: Encrypt application.properties.yaml
+      - name: Encrypt application-local.yaml
         run: |
           sops --encrypt \
                --age ${{ secrets.Public_key }} \
@@ -31,5 +31,5 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git add application-local.yaml.enc
-          git commit -m "Encrypt application.properties.yaml"
+          git commit -m "Encrypt application-local.yaml"
           git push
